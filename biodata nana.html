@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nana's Grand Universe ౨ৎ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Playfair+Display:italic,wght@400;700&family=Poppins:wght@300;400;600&family=Dancing+Script:wght@700&family=Cherry+Bomb+One&family=Pinyon+Script&display=swap" rel="stylesheet">
+    <style>
+        :root { 
+            --soft-pink: #fff0f3; 
+            --coquette-pink: #ffb7c5; 
+            --deep-rose: #ff8fa3;
+            --rose-gold: #d4a5a5; 
+            --glass: rgba(255, 255, 255, 0.5);
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; scroll-behavior: smooth; }
+        
+        body { 
+            font-family: 'Poppins', sans-serif; 
+            color: #8c6a6a; 
+            cursor: none;
+            overflow-x: hidden;
+            
+            /* --- BACKGROUND SUPER COQUETTE AESTHETIC --- */
+            background-color: #fff5f7; 
+            background-image: 
+                url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="60" height="60" viewBox="0 0 60 60"><path d="M30 15c-2-4-8-4-10 0-2 4 2 8 10 12 8-4 12-8 10-12-2-4-8-4-10 0z" fill="%23ffb7c5" fill-opacity="0.2"/></svg>'),
+                radial-gradient(var(--soft-pink) 2px, transparent 2px);
+            background-size: 60px 60px, 30px 30px;
+            background-attachment: fixed;
+        }
+
+        /* CUSTOM CURSOR */
+        .cursor { position: fixed; font-size: 25px; pointer-events: none; z-index: 10000; transform: translate(-50%, -50%); transition: 0.1s; filter: drop-shadow(0 0 5px white); }
+
+        /* NAVBAR */
+        nav { 
+            display: flex; justify-content: center; gap: 30px; padding: 15px; 
+            position: fixed; width: 90%; top: 15px; left: 5%; z-index: 999; 
+            background: rgba(255, 255, 255, 0.6); backdrop-filter: blur(12px);
+            border: 2px solid white; border-radius: 50px;
+            box-shadow: 0 10px 30px rgba(255, 183, 197, 0.2);
+        }
+        nav a { 
+            text-decoration: none; color: var(--rose-gold); font-size: 18px; 
+            transition: 0.3s; font-family: 'Dancing Script', cursive;
+        }
+        nav a:hover { color: var(--deep-rose); transform: scale(1.1) rotate(-3deg); }
+
+        /* HERO */
+        .hero { 
+            height: 100vh; display: flex; flex-direction: column; align-items: center; 
+            justify-content: center; text-align: center; position: relative;
+        }
+        .hero h1 { 
+            font-family: 'Cherry Bomb One', cursive; 
+            font-size: clamp(45px, 10vw, 85px);
+            color: white; 
+            text-shadow: 4px 4px 0px var(--coquette-pink), 8px 8px 20px rgba(255, 183, 197, 0.5);
+            animation: float 4s ease-in-out infinite;
+        }
+        .hero p { 
+            font-family: 'Pinyon Script', cursive; font-size: clamp(28px, 6vw, 42px); 
+            color: var(--deep-rose); margin-top: 10px; font-weight: bold;
+        }
+        
+        .btn-custom { 
+            margin-top: 40px; padding: 15px 45px; background: white; 
+            border: 3px solid var(--coquette-pink); color: var(--coquette-pink); 
+            border-radius: 50px; text-decoration: none; font-weight: bold; 
+            box-shadow: 0 8px 0px var(--coquette-pink);
+            font-size: 18px; transition: 0.2s; position: relative;
+        }
+        .btn-custom::before, .btn-custom::after { content: '౨ৎ'; position: absolute; top: 10px; font-size: 25px; opacity: 0.5; }
+        .btn-custom::before { left: -30px; }
+        .btn-custom::after { right: -30px; }
+        
+        .btn-custom:hover { transform: translateY(-3px); box-shadow: 0 12px 0px var(--coquette-pink); background: var(--soft-pink); }
+
+        /* CONTENT CARDS */
+        .content-card { 
+            background: rgba(255, 255, 255, 0.9);
+            margin: 80px auto; padding: 50px; 
+            border-radius: 50px; max-width: 950px; width: 92%; 
+            box-shadow: 0 25px 50px rgba(255,183,197,0.2); 
+            border: 10px solid var(--soft-pink); position: relative;
+            backdrop-filter: blur(5px);
+        }
+        
+        .content-card::before { content: '🎀'; position: absolute; top: -30px; left: -20px; font-size: 60px; z-index: 10; }
+
+        .about-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 40px; align-items: center; }
+        
+        /* --- FOTO PROFILE SUPER AESTHETIC --- */
+        .img-container { 
+            position: relative; 
+            display: flex; justify-content: center; align-items: center;
+        }
+        
+        /* Layer 1: Frame Renda */
+        .img-container::before { 
+            content: ''; position: absolute; top: -15px; left: -15px; right: -15px; bottom: -15px; 
+            border: 10px dotted var(--coquette-pink); border-radius: 55px; pointer-events: none;
+            animation: pulse 2s infinite;
+        }
+        
+        .about-img { 
+            width: 100%; max-width: 320px; border-radius: 40px; 
+            border: 15px solid white;
+            box-shadow: 0 15px 35px rgba(255,183,197,0.3);
+            transform: rotate(-3deg); transition: 0.5s;
+            position: relative; z-index: 2;
+        }
+        
+        .img-container:hover .about-img { transform: rotate(0deg) scale(1.05); }
+
+        /* BIO BOXES */
+        .bio-title { font-family: 'Cherry Bomb One', cursive; font-size: 45px; text-align: center; color: var(--coquette-pink); margin-bottom: 40px; }
+        .bio-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 25px; }
+        
+        .bio-box { 
+            background: linear-gradient(135deg, #fffafa 0%, var(--soft-pink) 100%); 
+            padding: 30px 20px; border-radius: 35px; text-align: center; border: 2px solid white; transition: 0.4s;
+        }
+        .bio-box:hover { transform: translateY(-8px) rotate(2deg); background: white; border-color: var(--coquette-pink); }
+        .bio-box span { display: block; font-size: 12px; letter-spacing: 3px; color: var(--rose-gold); font-weight: 800; margin-bottom: 8px; }
+        .bio-box p { font-family: 'Playfair Display', serif; font-weight: 700; font-size: 20px; color: #6d4c4c; }
+
+        /* ANIMATIONS */
+        .sticker { position: absolute; z-index: -1; animation: swing 5s ease-in-out infinite; }
+        @keyframes float { 0%, 100% { transform: translateY(0); } 50% { transform: translateY(-20px); } }
+        @keyframes swing { 0%, 100% { transform: rotate(-8deg); } 50% { transform: rotate(8deg); } }
+        @keyframes pulse { 0%, 100% { transform: scale(1); opacity: 0.6; } 50% { transform: scale(1.05); opacity: 0.3; } }
+        
+        .sparkle { position: fixed; pointer-events: none; animation: fadeOut 1.2s forwards; z-index: 9999; }
+        @keyframes fadeOut { 0% { opacity: 1; transform: scale(1); } 100% { opacity: 0; transform: scale(2.5); } }
+
+        footer { padding: 60px; text-align: center; font-family: 'Pinyon Script', cursive; font-size: 35px; color: var(--deep-rose); font-weight: bold; }
+    </style>
+</head>
+<body>
+
+    <div class="cursor">🐾</div>
+
+    <div class="sticker" style="top: 10%; left: 5%; font-size: 60px;">🦢</div>
+    <div class="sticker" style="top: 25%; right: 8%; font-size: 70px;">🎀</div>
+    <div class="sticker" style="bottom: 20%; left: 3%; font-size: 55px;">🩰</div>
+    <div class="sticker" style="bottom: 10%; right: 5%; font-size: 65px;">🍰</div>
+    <div class="sticker" style="top: 50%; left: 10%; font-size: 40px; opacity: 0.3;">✨</div>
+
+    <nav>
+        <a href="#home">Home</a>
+        <a href="#about">Her Story</a>
+        <a href="#biodata">Secret Bio</a>
+        <a href="hobi nana.html">Socials 📱</a>
+    </nav>
+
+    <section class="hero" id="home">
+        <div style="font-size: 70px; margin-bottom: 10px; filter: drop-shadow(0 0 10px white);">౨ৎ</div>
+        <h1>Nana's Universe</h1>
+        <p>Stay sweet, stay paws-itive...</p>
+        <a href="hobi nana.html" class="btn-custom">Peek into My Diary 🐾</a>
+    </section>
+
+    <section id="about">
+        <div class="content-card">
+            <div class="about-grid">
+                <div class="img-container">
+                    <img src="https://i.ibb.co.com/Zz9Dgg8x/IMG-20260313-WA0051.jpg" class="about-img" alt="Nana">
+                    <div style="position: absolute; bottom: -25px; right: -15px; font-size: 60px; z-index: 3;">🐱</div>
+                </div>
+                <div class="about-text">
+                    <h2 style="font-family: 'Cherry Bomb One'; font-size: 42px; color: var(--coquette-pink); margin-bottom: 20px; text-shadow: 2px 2px white;">Hi, I'm Nana! ✨</h2>
+                    <p style="font-size: 16px; line-height: 2; color: #8c6a6a;">
+                        Seorang pecinta kucing dengan hati yang lembut. Aku percaya bahwa kebahagiaan itu sesederhana mendengar dengkuran kucing di sore hari yang tenang.
+                    </p>
+                    <p style="margin-top: 15px; font-size: 16px; line-height: 2;">
+                        Meskipun aku punya sifat <span style="color: var(--deep-rose); font-weight: 600;">"gaenakan"</span>, aku selalu mencoba menyebarkan kasih sayang lewat hal-hal kecil di sekitarku. ౨ৎ
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <section id="biodata">
+        <div class="content-card">
+            <h2 class="bio-title">Paws-data 🎀</h2>
+            <div class="bio-grid">
+                <div class="bio-box"><span>NAME</span><p>Siti Nur Hasanah</p></div>
+                <div class="bio-box"><span>BORN</span><p>Banyuwangi, 2004</p></div>
+                <div class="bio-box"><span>MAJOR</span><p>Promosi Kesehatan</p></div>
+                <div class="bio-box"><span>NIM</span><p>G43252156</p></div>
+                <div class="bio-box"><span>Golongan</span><p>C</p></div>
+                <div class="bio-box"><span>Absen</span><p>14</p></div>
+            </div>
+        </div>
+    </section>
+
+    <footer>
+        <p>With Love, Nana ౨ৎ</p>
+    </footer>
+
+    <script>
+        const cursor = document.querySelector(".cursor");
+        document.addEventListener("mousemove", e => {
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";
+
+            if(Math.random() > 0.85) {
+                let s = document.createElement("div");
+                s.className = "sparkle";
+                const icons = ['✨', '🌸', '🎀', '🤍', '౨ৎ'];
+                s.innerHTML = icons[Math.floor(Math.random() * icons.length)];
+                s.style.left = e.clientX + "px";
+                s.style.top = e.clientY + "px";
+                s.style.color = "#ffb7c5";
+                s.style.fontSize = Math.random() * 20 + 10 + "px";
+                document.body.appendChild(s);
+                setTimeout(() => s.remove(), 1200);
+            }
+        });
+
+        function createFall() {
+            const items = ['🌸', '🐱', '🎀', '✨', '🤍', '🦢'];
+            const item = document.createElement("div");
+            item.innerHTML = items[Math.floor(Math.random()*items.length)];
+            item.style.position = "fixed";
+            item.style.top = "-50px";
+            item.style.left = Math.random() * 100 + "vw";
+            item.style.fontSize = Math.random() * 20 + 10 + "px";
+            item.style.opacity = "0.5";
+            item.style.transition = "transform 6s linear";
+            item.style.zIndex = "-1";
+            document.body.appendChild(item);
+            setTimeout(() => { item.style.transform = `translateY(110vh) rotate(${Math.random() * 360}deg)`; }, 100);
+            setTimeout(() => item.remove(), 6000);
+        }
+        setInterval(createFall, 400);
+    </script>
+</body>
+</html>

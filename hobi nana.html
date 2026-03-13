@@ -1,0 +1,314 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nana's Sweet Hobbies ౨ৎ</title>
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@600&family=Poppins:wght@300;400;600&family=Playfair+Display:italic,wght@700&family=Cherry+Bomb+One&display=swap" rel="stylesheet">
+    <style>
+    :root {
+        --pink-bg: #fff5f7;
+        --soft-pink: #fff0f3;
+        --coquette-pink: #ffb7c5;
+        --rose-text: #8c6a6a;
+        --accent-pink: #ffcad4;
+    }
+
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    
+    /* Cursor kustom tetep ada, tapi pointer-events: none biar gak ganggu klik */
+    body { 
+        background: var(--pink-bg); 
+        font-family: 'Poppins', sans-serif; 
+        color: var(--rose-text); 
+        padding: 100px 15px 60px 15px;
+        background-image: radial-gradient(var(--accent-pink) 0.8px, transparent 0.8px);
+        background-size: 30px 30px;
+        cursor: none; /* Kursor default disembunyiin */
+    }
+
+    /* Kursor Estetik */
+    .cursor {
+        position: fixed; width: 30px; height: 30px;
+        background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'><text y='20' font-size='24'>౨ৎ</text></svg>");
+        pointer-events: none; z-index: 9999; transform: translate(-50%, -50%);
+    }
+
+    /* Navbar & Dropdown Fix */
+    nav { 
+        display: flex; justify-content: center; gap: 20px; padding: 12px 30px; 
+        position: fixed; top: 15px; z-index: 1000; 
+        background: rgba(255, 255, 255, 0.8); backdrop-filter: blur(15px);
+        border: 2px solid white; border-radius: 50px;
+        box-shadow: 0 8px 25px rgba(255, 183, 197, 0.2);
+    }
+    
+    nav a, .drop-btn { 
+        text-decoration: none; color: var(--rose-text); font-size: 14px; 
+        font-weight: 600; cursor: pointer; border: none; background: none;
+    }
+
+    .dropdown { position: relative; display: inline-block; }
+    
+    .dropdown-content {
+        display: none; position: absolute; top: 100%; left: 50%;
+        transform: translateX(-50%); background: white;
+        min-width: 140px; border-radius: 20px; padding: 10px;
+        box-shadow: 0 10px 25px rgba(255, 183, 197, 0.3);
+        border: 2px solid var(--soft-pink); margin-top: 15px;
+    }
+    
+    /* Jembatan tak terlihat supaya gak kedip */
+    .dropdown::before {
+        content: ""; position: absolute; top: 100%; left: 0; width: 100%; height: 20px;
+    }
+
+    .dropdown-content a { 
+        color: var(--rose-text); padding: 10px; display: block; 
+        font-size: 13px; text-align: center; border-radius: 15px; text-decoration: none;
+    }
+    .dropdown-content a:hover { background: var(--soft-pink); }
+    .dropdown:hover .dropdown-content { display: block; }
+
+    /* Hobi Card */
+    .hobby-card { 
+        background: rgba(255, 255, 255, 0.9); padding: 40px; 
+        border-radius: 50px; max-width: 750px; width: 100%;
+        margin: 0 auto; box-shadow: 0 25px 50px rgba(255,183,197,0.3); 
+        border: 8px solid white;
+    }
+
+    h1 { font-family: 'Cherry Bomb One', cursive; font-size: 50px; color: white; text-shadow: 3px 3px 0 var(--coquette-pink); text-align: center; margin-bottom: 5px; }
+    .subtitle { font-family: 'Dancing Script', cursive; font-size: 24px; text-align: center; margin-bottom: 40px; color: #d4a5a5; }
+    
+    .hobby-item { background: white; margin-bottom: 25px; padding: 25px; border-radius: 35px; border: 2px solid var(--soft-pink); }
+    .hobby-icon { font-size: 30px; margin-bottom: 10px; }
+    
+    .falling-emoji { position: fixed; pointer-events: none; z-index: 999; animation: fall 5s linear forwards; }
+    @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+</style>
+    <style>
+        :root {
+            --pink-bg: #fff5f7;
+            --soft-pink: #fff0f3;
+            --coquette-pink: #ffb7c5;
+            --rose-text: #8c6a6a;
+            --accent-pink: #ffcad4;
+        }
+
+        * { margin: 0; padding: 0; box-sizing: border-box; cursor: none; }
+
+        body { 
+            background: var(--pink-bg); 
+            font-family: 'Poppins', sans-serif; 
+            color: var(--rose-text); 
+            display: flex; 
+            flex-direction: column; 
+            align-items: center; 
+            padding: 100px 15px 60px 15px;
+            overflow-x: hidden;
+            background-image: radial-gradient(var(--accent-pink) 0.8px, transparent 0.8px);
+            background-size: 30px 30px;
+        }
+
+        /* --- NAVBAR --- */
+        nav { 
+            display: flex; justify-content: center; gap: 20px; padding: 12px 30px; 
+            position: fixed; top: 15px; z-index: 1000; 
+            background: rgba(255, 255, 255, 0.7); backdrop-filter: blur(15px);
+            border: 2px solid white; border-radius: 50px;
+            box-shadow: 0 8px 25px rgba(255, 183, 197, 0.2);
+        }
+        
+        nav a, /* --- GANTI BAGIAN DROPDOWN DI CSS KAMU DENGAN INI --- */
+        .dropdown { position: relative; display: inline-block; }
+        
+        .dropdown-content {
+            display: none; 
+            position: absolute; 
+            top: 100%; 
+            left: 50%;
+            transform: translateX(-50%); 
+            background: white;
+            min-width: 140px; 
+            border-radius: 15px; 
+            padding: 8px;
+            box-shadow: 0 10px 25px rgba(255, 183, 197, 0.3);
+            border: 2px solid var(--soft-pink); 
+            z-index: 1001; 
+            margin-top: 10px;
+        }
+
+        /* Ini trik biar dropdown "stay" saat kursor pindah ke menu */
+        .dropdown::after {
+            content: '';
+            position: absolute;
+            top: 100%;
+            left: 0;
+            width: 100%;
+            height: 15px; /* Area transparan penghubung */
+        }
+
+        .dropdown-content a { 
+            color: var(--rose-text); 
+            padding: 10px; 
+            display: block; 
+            font-size: 13px; 
+            text-align: center; 
+            border-radius: 10px; 
+            text-decoration: none; /* Tambahin ini biar rapi */
+        }
+        
+        .dropdown-content a:hover { background: var(--soft-pink); }
+        
+        /* Dropdown muncul saat tombol di-hover ATAU menu itu sendiri di-hover */
+        .dropdown:hover .dropdown-content { display: block; }
+        /* --- CONTENT --- */
+        h1 { 
+            font-family: 'Cherry Bomb One', cursive; font-size: clamp(35px, 8vw, 55px); 
+            color: white; text-shadow: 3px 3px 0px var(--coquette-pink), 6px 6px 0px var(--soft-pink);
+            margin-bottom: 5px; text-align: center;
+        }
+
+        .subtitle { font-family: 'Dancing Script', cursive; font-size: 24px; margin-bottom: 40px; color: #d4a5a5; font-weight: bold; }
+
+        .hobby-card { 
+            background: rgba(255, 255, 255, 0.85); padding: 40px 15px; 
+            border-radius: 50px; max-width: 750px; width: 100%;
+            box-shadow: 0 25px 50px rgba(255,183,197,0.3); 
+            border: 8px solid white; position: relative;
+            backdrop-filter: blur(10px);
+        }
+
+        .hobby-item { 
+            background: white; margin-bottom: 35px; padding: 25px; 
+            border-radius: 35px; border: 2px solid var(--soft-pink);
+            display: flex; flex-direction: column; gap: 15px;
+        }
+
+        .hobby-header { display: flex; align-items: center; gap: 15px; }
+
+        .hobby-icon {
+            font-size: 30px; min-width: 60px; height: 60px;
+            background: var(--soft-pink); display: flex; align-items: center;
+            justify-content: center; border-radius: 50%; border: 2px dashed var(--coquette-pink);
+        }
+
+        /* --- FOTO KECIL --- */
+        .hobby-gallery {
+            display: flex; gap: 10px; overflow-x: auto; padding: 5px;
+            justify-content: center; 
+        }
+
+        .photo-frame {
+            min-width: 120px; height: 150px; 
+            background: #fff;
+            border: 5px solid white; border-radius: 12px;
+            box-shadow: 0 4px 10px rgba(0,0,0,0.1);
+            position: relative; overflow: hidden; transform: rotate(-1.5deg);
+        }
+        .photo-frame img { width: 100%; height: 100%; object-fit: cover; }
+
+        /* --- ANIMATIONS & CURSOR --- */
+        .falling-emoji { position: fixed; pointer-events: none; z-index: 999; animation: fall 5s linear forwards; }
+        @keyframes fall { to { transform: translateY(110vh) rotate(360deg); opacity: 0; } }
+
+        .cursor {
+            position: fixed; width: 30px; height: 30px;
+            background: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='40' height='40' viewBox='0 0 24 24'><text y='20' font-size='24'>౨ৎ</text></svg>");
+            pointer-events: none; z-index: 10001; transform: translate(-50%, -50%);
+        }
+    </style>
+</head>
+<body>
+
+    <div class="cursor"></div>
+
+    <nav>
+        <a href="biodata nana.html">Home</a>
+        <div class="dropdown">
+            <button class="drop-btn">Social ▾</button>
+            <div class="dropdown-content">
+                <a href="https://instagram.com/shanabiie" target="_blank">📸 Instagram</a>
+                <a href="https://www.tiktok.com/@nannaaaaaaa_04" target="_blank">📱 TikTok</a>
+            </div>
+        </div>
+    </nav>
+
+    <h1>Nana's Hobby ౨ৎ</h1>
+    <p class="subtitle">My Sweet Little Escape ✨</p>
+
+    <div class="hobby-card">
+        
+        <div class="hobby-item">
+            <div class="hobby-header">
+                <div class="hobby-icon">🎧</div>
+                <b style="font-family: 'Playfair Display'; font-size: 20px; color: var(--coquette-pink);">Music is My Soul 🎀</b>
+            </div>
+            <p style="font-size: 13px; line-height: 1.6;">
+                Dunia aku tuh berisik banget kalau nggak ada musik! 🩰 Aku suka banget sama Blackpink karena mereka tuh *cool* dan bikin aku ngerasa *confident*. Kalau lagi pengen dengerin lagu yang punya makna dalem banget, BTS juaranya, liriknya selalu bisa nenangin pikiran. Terus, aku juga lagi ketagihan dengerin lagu-lagu Random di tiktok! Irama lagunya unik banget, bikin pengen joget tipis-tipis dan naikin *mood* aku dalam sekejap! ✨
+            </p>
+            <div class="hobby-gallery">
+                <div class="photo-frame"><img src="https://i.ibb.co.com/B2V9p1bD/usr-1664158212001.jpg" alt="BP"></div>
+                <div class="photo-frame"><img src="https://i.ibb.co.com/fzZVJyLM/images-06s-H1-B0f-d-Y403-H.jpg" alt="BTS"></div>
+                <div class="photo-frame"><img src="https://i.ibb.co.com/bMSgBjp6/a35b2231d0aef1e39db130d965a46871.jpg" alt="Random"></div>
+            </div>
+        </div>
+
+        <div class="hobby-item">
+            <div class="hobby-header">
+                <div class="hobby-icon">🍿</div>
+                <b style="font-family: 'Playfair Display'; font-size: 20px; color: var(--coquette-pink);">Movie Time! 🎀</b>
+            </div>
+            <p style="font-size: 13px; line-height: 1.6;">
+                Nonton tuh cara aku *healing* paling ampuh dari balik selimut. ☁️ Walaupun penakut, aku anehnya suka banget nonton film Horror! Sensasi tegangnya itu loh yang dicari. Tapi, sisi cewek aku juga nggak bisa lepas dari Barbie, dunianya yang *pink* dan estetik selalu bikin aku happy. Kalau lagi pengen yang seru dan nggak ngebosenin, film Action jadi pelarian aku biar nggak ngantuk pas lagi *me-time*! 🎀
+            </p>
+            <div class="hobby-gallery">
+                <div class="photo-frame"><img src="https://i.ibb.co.com/cKB3Rc5b/585de16cf8b8eb947835e0aa3e22f6a6.jpg" alt="Horror"></div>
+                <div class="photo-frame"><img src="https://i.ibb.co.com/v4fKsnmQ/e1670fd6206f454221853a15e83038f5.jpg" alt="Barbie"></div>
+                <div class="photo-frame"><img src="https://i.ibb.co.com/yJybp89/0fe7259f579517d8364607fe11eb9abf.jpg" alt="Action"></div>
+            </div>
+        </div>
+
+        <div class="hobby-item">
+            <div class="hobby-header">
+                <div class="hobby-icon">🐾</div>
+                <b style="font-family: 'Playfair Display'; font-size: 20px; color: var(--coquette-pink);">My Furry Angels 🎀</b>
+            </div>
+            <p style="font-size: 13px; line-height: 1.6;">
+                *I'm officially a cat person!* 🐱 Bagiku, kucing tuh makhluk paling tulus dan gemoy sedunia. Sesibuk atau secapek apapun aku, kalau udah liat tingkah konyol mereka dan denger suara *purring*-nya, semua beban pikiran tuh kayak ilang gitu aja. Mereka bukan cuma peliharaan, tapi sahabat yang selalu ada pas aku lagi pengen dimanja atau butuh temen main. Sayang banget pokoknya! 🤍
+            </p>
+            <div class="hobby-gallery">
+                <div class="photo-frame"><img src="https://i.ibb.co.com/hJ3RHDrs/a7db81c0eda2275be2b0bc495f806787.jpg" alt="Cat"></div>
+                <div class="photo-frame"><img src="https://i.ibb.co.com/Y7bwSpYs/96687820b109978597ffb43dface281b.jpg" alt="Cat"></div>
+            </div>
+        </div>
+
+    </div>
+
+    <script>
+        // Custom Cursor
+        const cursor = document.querySelector(".cursor");
+        document.addEventListener("mousemove", (e) => {
+            cursor.style.left = e.clientX + "px";
+            cursor.style.top = e.clientY + "px";
+        });
+
+        // Hujan Emoji (Dibuat lebih simpel agar pasti muncul)
+        function createEmoji() {
+            const emojis = ['🌸', '✨', '🎀', '🤍', '🌷', '🦢', '🐱'];
+            const e = document.createElement("div");
+            e.className = "falling-emoji";
+            e.innerText = emojis[Math.floor(Math.random() * emojis.length)];
+            e.style.left = Math.random() * 100 + "vw";
+            e.style.top = "-30px";
+            e.style.fontSize = "20px";
+            e.style.position = "fixed";
+            e.style.animation = "fall " + (Math.random() * 3 + 2) + "s linear forwards";
+            document.body.appendChild(e);
+            setTimeout(() => { e.remove(); }, 5000);
+        }
+        setInterval(createEmoji, 300);
+    </script>
+</body>
+</html>
